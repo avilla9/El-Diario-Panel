@@ -36,7 +36,6 @@ class PageController extends Controller {
     public function productionData() {
         $users = User::select(
             'users.id as id',
-            'users.dni as dni',
             'users.name as name',
         )
             ->join(
@@ -277,14 +276,14 @@ class PageController extends Controller {
 
     public function contentroomCreate() {
         $data = contentParameters();
-        $sections = sectionParameters('Salas');
+        $sections = sectionParameters('Clubes');
         $data['sections'] = $sections;
         return view('pages/content/room/create', $data);
     }
 
     function contentroomList() {
         return view('pages/content/room/list', [
-            'articles'  => articlesByPage('Salas')
+            'articles'  => articlesByPage('Clubes')
         ]);
     }
 
@@ -297,13 +296,13 @@ class PageController extends Controller {
 
         $sections = DB::table('pages')
             ->join('sections', 'sections.page_id', '=', 'pages.id')
-            ->where('pages.title', 'Salas')
+            ->where('pages.title', 'Clubes')
             ->get();
         $articles = DB::table('pages')
             ->select('sections.*', 'files.media_path as img')
             ->join('sections', 'sections.page_id', '=', 'pages.id')
             ->leftJoin('files', 'files.id', '=', 'sections.file_id')
-            ->where('pages.title', 'Salas')
+            ->where('pages.title', 'Clubes')
             ->get();
             
         $files = File::where('media_type', 'like', '%image%')->latest()->get();
@@ -313,11 +312,11 @@ class PageController extends Controller {
                 'data' => $groups
             ] : true;
             count($quartiles) > 0 ? $filters['quartiles'] = [
-                'name' => 'Cuartiles',
+                'name' => 'Figuras',
                 'data' => $quartiles
             ] : true;
             count($delegations) > 0 ? $filters['delegations'] = [
-                'name' => 'Delegaciones',
+                'name' => 'Sucursales',
                 'data' => $delegations
             ] : true;
             count($roles) > 0 ? $filters['roles'] = [
@@ -340,14 +339,14 @@ class PageController extends Controller {
 
     public function contentaccessCreate() {
         $data = contentParameters();
-        $sections = sectionParameters('Accesos');
+        $sections = sectionParameters('La Boutique');
         $data['sections'] = $sections;
         return view('pages/content/access/create', $data);
     }
 
     function contentaccessList() {
         return view('pages/content/access/list', [
-            'articles'  => articlesByPage('Accesos')
+            'articles'  => articlesByPage('La Boutique')
         ]);
     }
 
@@ -1014,11 +1013,11 @@ function contentParameters() {
         'data' => $groups
     ] : true;
     count($quartiles) > 0 ? $filters['quartiles'] = [
-        'name' => 'Cuartiles',
+        'name' => 'Figuras',
         'data' => $quartiles
     ] : true;
     count($delegations) > 0 ? $filters['delegations'] = [
-        'name' => 'Delegaciones',
+        'name' => 'Sucursales',
         'data' => $delegations
     ] : true;
     count($roles) > 0 ? $filters['roles'] = [

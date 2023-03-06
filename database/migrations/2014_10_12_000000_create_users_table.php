@@ -14,8 +14,9 @@ class CreateUsersTable extends Migration {
     public function up() {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('dni');
+            $table->string('user_code');
             $table->string('name', 50);
+            $table->string('last_name', 50);
             $table->string('email', 120)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -24,12 +25,12 @@ class CreateUsersTable extends Migration {
             $table->integer('active')->default(1);
             $table->softDeletes();
             $table->rememberToken();
-            $table->float('secicoins')->nullable();
+            $table->float('soles')->nullable();
             $table->integer('role_id');
             $table->integer('group_id')->nullable();
             $table->integer('quartile_id')->nullable();
             $table->string('delegation_code')->nullable();
-            $table->string('territorial', 25)->nullable();
+            $table->string('regional', 25)->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

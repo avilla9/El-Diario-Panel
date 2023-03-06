@@ -15,8 +15,8 @@ class DeleteUsersImport implements ToModel, WithHeadingRow {
     public function model(array $row) {
         if (strlen($row['email'])) {
             User::where('email', $row['email'])->delete();
-        } elseif (strlen($row['dni'])) {
-            User::where('dni', $row['dni'])->delete();
+        } elseif (strlen($row['user_code'])) {
+            User::where('user_code', $row['user_code'])->delete();
         }
     }
 }

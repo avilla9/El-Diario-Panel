@@ -83,7 +83,6 @@
           <table class="table">
             <thead class="table-dark">
               <th>#</th>
-              <th>DNI</th>
               <th>Nombre</th>
               <th>Email</th>
             </thead>
@@ -120,7 +119,6 @@
           $('#access-details').append(`
           <tr>
             <td class="whitespace-nowrap">${index + 1}</td>
-            <td class="whitespace-nowrap">${val.dni}</td>
             <td class="whitespace-nowrap">${val.name}</td>
             <td class="whitespace-nowrap">${val.email}</td>
           </tr>

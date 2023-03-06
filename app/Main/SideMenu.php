@@ -294,7 +294,7 @@ class SideMenu {
             ],
             'room-content' => [
                 'icon' => 'star',
-                'title' => 'Salas',
+                'title' => 'Clubes',
                 'sub_menu' => [
                     'content-room-create' => [
                         'title' => 'Crear contenido',
@@ -324,7 +324,7 @@ class SideMenu {
             ],
             'access-content' => [
                 'icon' => 'log-in',
-                'title' => 'Accesos',
+                'title' => 'La Boutique',
                 'sub_menu' => [
                     'content-access-create' => [
                         'title' => 'Crear contenido',
@@ -343,14 +343,6 @@ class SideMenu {
                         ],
                     ],
                 ]
-            ],
-            'firebase-notification' => [
-                'icon' => 'bell',
-                'title' => 'Notificaciones',
-                'route_name' => 'firebase-notification',
-                'params' => [
-                    'layout' => 'side-menu'
-                ],
             ],
         ];
     }

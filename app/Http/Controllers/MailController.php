@@ -26,8 +26,6 @@ class MailController extends Controller {
 
   public function send($data) {
     $email = new \stdClass();
-
-    $email->dni = $this->data['dni'];
     $email->name = $this->data['name'];
     $email->email = $this->data['email'];
     $email->agent_code = $this->data['agent_code'];

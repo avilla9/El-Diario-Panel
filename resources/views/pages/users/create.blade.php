@@ -31,10 +31,6 @@
       <div class="intro-y box">
         <div id="input" class="p-5">
           <div class="preview">
-            <div>
-              <label for="regular-form-1" class="form-label">DNI</label>
-              <input id="regular-form-1" name="dni" type="number" class="form-control" placeholder="DNI" value="{{ old('dni') }}">
-            </div>
             <div class="mt-3">
               <label for="regular-form-1" class="form-label">Código de usuario</label>
               <input id="regular-form-1" name="user_code" type="text" class="form-control" placeholder="Código de usuario" value="{{ old('user_code') }}">
@@ -52,12 +48,12 @@
               <input id="regular-form-1" type="email" class="form-control" name="email" placeholder="Correo" value="{{ old('email') }}">
             </div>
             <div class="mt-3">
-              <label for="regular-form-1" class="form-label">Territorial</label>
-              <input id="regular-form-1" type="text" class="form-control" name="territorial" placeholder="Territorial" value="{{ old('territorial') }}">
+              <label for="regular-form-1" class="form-label">Regional</label>
+              <input id="regular-form-1" type="text" class="form-control" name="regional" placeholder="Regional" value="{{ old('regional') }}">
             </div>
             <div class="mt-3">
-              <label for="regular-form-1" class="form-label">SECI Coins</label>
-              <input id="regular-form-1" type="number" class="form-control" name="secicoins" placeholder="SECI Coins">
+              <label for="regular-form-1" class="form-label">Soles</label>
+              <input id="regular-form-1" type="number" class="form-control" name="soles" placeholder="Soles">
             </div>
             <div class="mt-3">
               <label for="regular-form-4" class="form-label" style="width: 100%;">Contraseña</label>
@@ -81,10 +77,10 @@
           </div>
 
           <div class="mt-3">
-            <label>Delegación</label>
+            <label>Sucursal</label>
             <div class="mt-2">
-              <select data-placeholder="Seleccione una delegación para el usuario" name="delegation_id" class="tom-select w-full">
-                <option disabled selected>Seleccione una delegación para el usuario</option>
+              <select data-placeholder="Seleccione una Sucursal para el usuario" name="delegation_id" class="tom-select w-full">
+                <option disabled selected>Seleccione una Sucursal para el usuario</option>
                 @foreach ($delegations as $delegation)
                 <option value="{{ $delegation->id }}">
                   {{ $delegation->code }} - {{ $delegation->name }}
@@ -107,10 +103,10 @@
           </div>
 
           <div class="mt-3">
-            <label>Cuartil del usuario</label>
+            <label>Figura del usuario</label>
             <div class="mt-2">
               <select data-placeholder="Seleccione un rol para el usuario" name="quartile_id" class="tom-select w-full">
-                <option disabled selected>Seleccione un cuartil para el usuario</option>
+                <option disabled selected>Seleccione un Figura para el usuario</option>
                 @foreach ($quartiles as $quartile)
                 <option value="{{ $quartile->id }}">{{ $quartile->name }}</option>
                 @endforeach

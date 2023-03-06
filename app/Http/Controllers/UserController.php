@@ -62,7 +62,6 @@ class UserController extends Controller {
     public function store(Request $request) {
         $request->validate(
             [
-                'dni' => 'required',
                 'user_code' => 'required',
                 'name' => 'required',
                 'last_name' => 'required',
@@ -76,7 +75,7 @@ class UserController extends Controller {
                         ->symbols()
                         ->uncompromised()
                 ],
-                'territorial' => 'required',
+                'regional' => 'required',
                 'role_id' => 'required|not_in:0',
                 'delegation_id' => 'required|not_in:0',
                 'quartile_id' => 'required|not_in:0',
@@ -129,7 +128,6 @@ class UserController extends Controller {
      */
     public function update(Request $request) {
         $validator = Validator($request->all(), [
-            'dni' => 'required',
             'user_code' => 'required',
             'name' => 'required',
             'last_name' => 'required',
@@ -143,7 +141,7 @@ class UserController extends Controller {
                     ->symbols()
                     ->uncompromised()
             ],
-            'territorial' => 'required',
+            'regional' => 'required',
             'role_id' => 'required|not_in:0',
             'delegation_id' => 'required|not_in:0',
             'quartile_id' => 'required|not_in:0',
@@ -158,8 +156,8 @@ class UserController extends Controller {
                 'name' => $request->name,
                 'gender' => $request->gender,
                 'email' => $request->email,
-                'territorial' => $request->territorial,
-                'secicoins' => $request->secicoins,
+                'regional' => $request->regional,
+                'soles' => $request->soles,
                 'group_id' => $request->group_id,
                 'role_id' => $request->role_id,
                 'delegation_code' => $delegation->code,
@@ -189,7 +187,6 @@ class UserController extends Controller {
     public function getAllUsers(Request $request) {
 
         $users = User::select(
-            'users.dni',
             'users.user_code',
             'users.gender',
             'users.active',
@@ -200,8 +197,8 @@ class UserController extends Controller {
             'users.id',
             'users.name',
             'users.last_name',
-            'users.secicoins',
-            'users.territorial as territorial',
+            'users.soles',
+            'users.regional as regional',
             'users.role_id',
             'roles.name as role_name',
             'roles.description as role_description',

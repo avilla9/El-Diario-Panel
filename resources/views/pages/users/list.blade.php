@@ -154,13 +154,6 @@
               <div class="intro-y box">
                 <div id="input" class="p-5">
                   <div class="preview">
-                    <div>
-                      <label for="regular-form-1" class="form-label">DNI</label>
-                      <input id="id" name="id" type="hidden" hidden class="form-control"
-                        placeholder="DNI">
-                      <input id="dni" name="dni" type="number" readonly class="form-control"
-                        placeholder="DNI">
-                    </div>
                     <div class="mt-3">
                       <label for="regular-form-1" class="form-label">Código de usuario</label>
                       <input id="user_code" name="user_code" type="text" class="form-control"
@@ -179,14 +172,14 @@
                       <input id="email" type="email" class="form-control" name="email" placeholder="Correo">
                     </div>
                     <div class="mt-3">
-                      <label for="regular-form-1" class="form-label">Territorial</label>
-                      <input id="territorial" type="text" class="form-control" name="territorial"
-                        placeholder="Territorial">
+                      <label for="regular-form-1" class="form-label">Regional</label>
+                      <input id="regional" type="text" class="form-control" name="regional"
+                        placeholder="Regional">
                     </div>
                     <div class="mt-3">
-                      <label for="regular-form-1" class="form-label">SECI Coins</label>
-                      <input id="secicoins" type="number" class="form-control" name="secicoins"
-                        placeholder="SECI Coins">
+                      <label for="regular-form-1" class="form-label">Soles</label>
+                      <input id="soles" type="number" class="form-control" name="soles"
+                        placeholder="Soles">
                     </div>
                     <div class="mt-3">
                       <label for="regular-form-4" class="form-label">Password </label>
@@ -212,11 +205,11 @@
                     </div>
                   </div>
                   <div class="mt-3">
-                    <label>Delegación</label>
+                    <label>Sucursal</label>
                     <div class="mt-2">
-                      <select data-placeholder="Seleccione una delegación para el usuario" name="delegation_id"
+                      <select data-placeholder="Seleccione una Sucursal para el usuario" name="delegation_id"
                         id="delegation_id" class="tom-select w-full">
-                        <option disabled>Seleccione una delegación para el usuario</option>
+                        <option disabled>Seleccione una Sucursal para el usuario</option>
                         @foreach ($delegations as $delegation)
                           <option value="{{ $delegation->id }}">
                             {{ $delegation->code }} - {{ $delegation->name }}
@@ -240,11 +233,11 @@
                   </div>
 
                   <div class="mt-3">
-                    <label>Cuartil del usuario</label>
+                    <label>Figura del usuario</label>
                     <div class="mt-2">
                       <select data-placeholder="Seleccione un rol para el usuario" name="quartile_id" id="quartile_id"
                         class="tom-select w-full">
-                        <option disabled>Seleccione un cuartil para el usuario</option>
+                        <option disabled>Seleccione un Figura para el usuario</option>
                         @foreach ($quartiles as $quartile)
                           <option value="{{ $quartile->id }}">{{ $quartile->name }}</option>
                         @endforeach

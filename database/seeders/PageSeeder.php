@@ -72,10 +72,6 @@ class PageSeeder extends Seeder {
                         'subtitle' => 'Tendencias, nuevos productos, comparativas',
                     ],
                     [
-                        'title' => 'El Trabajo',
-                        'subtitle' => 'Consejos, buenas prácticas, ejemplos',
-                    ],
-                    [
                         'title' => 'La Actitud',
                         'subtitle' => 'Conocimiento, constancia, actitud positiva.',
                     ],
@@ -87,10 +83,6 @@ class PageSeeder extends Seeder {
                         'title' => 'El Competidor',
                         'subtitle' => 'Ventajas competitivas, análisis, comparativas',
                     ],
-                    [
-                        'title' => 'La Compañía',
-                        'subtitle' => 'El Grupo, su cultura, una marca líder y referencia en España.'
-                    ]
                 ]
             ],
             [
@@ -104,22 +96,22 @@ class PageSeeder extends Seeder {
                     [
                         'title' => 'Share today',
                         'custom_class' => 'learn-today',
-                        'subtitle' => 'Comparte y gana SECI COINs por ello.',
+                        'subtitle' => 'Comparte y gana Soles por ello.',
                     ],
                     [
                         'title' => 'Love today',
                         'custom_class' => 'wall-of-fame',
-                        'subtitle' => 'Dinos lo que te gusta y gana SECI COINs por hacerlo!',
+                        'subtitle' => 'Dinos lo que te gusta y gana Soles por hacerlo!',
                     ],
                     [
-                        'title' => 'Happy box',
+                        'title' => 'La Boutique Ocaso',
                         'custom_class' => 'happy-box',
                         'subtitle' => '',
                     ],
                 ],
             ],
             [
-                'title' => 'Salas',
+                'title' => 'Clubes',
                 'sections' => [
                     [
                         'title' => 'TOP DELEGADOS',
@@ -127,7 +119,7 @@ class PageSeeder extends Seeder {
                     ],
                     [
                         'title' => 'TOP AGENTES',
-                        'description' => 'Pues si, si puedes entrar aquí es que eres el MVP de tu delegación.',
+                        'description' => 'Pues si, si puedes entrar aquí es que eres el MVP de tu Sucursal.',
                     ],
                     [
                         'title' => 'AGENTES EN FORMACIÓN',
@@ -136,7 +128,7 @@ class PageSeeder extends Seeder {
                 ]
             ],
             [
-                'title' => 'Accesos',
+                'title' => 'La Boutique',
                 'sections' => [['title' => 'Única']],
             ]
         ];

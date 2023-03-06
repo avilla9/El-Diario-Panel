@@ -60,8 +60,8 @@ class UsersImport implements
             $group = NULL;
         }
 
-        if (strlen($row['secicoins'])) {
-            $seci = $row['secicoins'];
+        if (strlen($row['soles'])) {
+            $seci = $row['soles'];
         } else {
             $seci = 0;
         }
@@ -74,16 +74,15 @@ class UsersImport implements
                 'email' => $row['email']
             ],
             [
-                'dni' => '000000',
                 'email', $row['email'],
                 'user_code' => $row['code'],
                 'name' => $row['name'],
                 'last_name' => $row['last_name'],
                 'role_id' => $role,
-                'territorial' => $row['territorial'],
+                'regional' => $row['regional'],
                 'password' => Hash::make($row['password']),
                 'active' => 1,
-                'secicoins' => $seci,
+                'soles' => $seci,
                 'delegation_code' => $delegation,
                 'quartile_id' => $quartile,
                 'group_id' => $group,
@@ -94,15 +93,14 @@ class UsersImport implements
         // if (userExist($row['email'])) {
         //     User::where('email', $row['email'])->update(
         //         [
-        //             'dni' => '000000',
         //             'user_code' => $row['code'],
         //             'name' => $row['name'],
         //             'last_name' => $row['last_name'],
         //             'role_id' => $role,
-        //             'territorial' => $row['territorial'],
+        //             'regional' => $row['regional'],
         //             'password' => Hash::make($row['password']),
         //             'active' => 1,
-        //             'secicoins' => $seci,
+        //             'soles' => $seci,
         //             'delegation_code' => $delegation,
         //             'quartile_id' => $quartile,
         //             'group_id' => $group,
@@ -111,16 +109,15 @@ class UsersImport implements
         // } else {
         //     return new User(
         //         [
-        //             'dni' => '000000',
         //             'email', $email,
         //             'user_code' => $row['code'],
         //             'name' => $row['name'],
         //             'last_name' => $row['last_name'],
         //             'role_id' => $role,
-        //             'territorial' => $row['territorial'],
+        //             'regional' => $row['regional'],
         //             'password' => Hash::make($row['password']),
         //             'active' => 1,
-        //             'secicoins' => $seci,
+        //             'soles' => $seci,
         //             'delegation_code' => $delegation,
         //             'quartile_id' => $quartile,
         //             'group_id' => $group,
@@ -145,8 +142,8 @@ class UsersImport implements
             'name' => 'required',
             'last_name' => 'required',
             'role' => 'required',
-            'territorial' => 'required',
-            'secicoins' => 'required',
+            'regional' => 'required',
+            'soles' => 'required',
             'group' => 'required',
             'quartile' => 'required',
             'delegation' => 'required',

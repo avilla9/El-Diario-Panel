@@ -40,9 +40,9 @@ Route::middleware('auth')->group(function () {
     // Route::get('/', [PageController::class, 'dashboardOverview1'])->name('dashboard-overview-1');
     Route::get('/', [PageController::class, 'userList'])->name('lista-de-usuarios');
 
-    Route::get('/notifications', function () {
+    /* Route::get('/notifications', function () {
         return redirect()->away('https://console.firebase.google.com/project/app-eci/messaging');
-    })->name('firebase-notification');
+    })->name('firebase-notification'); */
 
     Route::prefix('/file')->group(function () {
         Route::controller(PageController::class)->group(function () {

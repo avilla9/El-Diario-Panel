@@ -147,7 +147,6 @@ return [
     */
 
     'attributes' => [
-        'dni' => 'DNI',
         'description'=> 'Descripcion',
         'title'=> 'Titulo',
         'image'=> 'Imagen',
@@ -155,10 +154,10 @@ return [
         'email' => 'Correo',
         'password' => 'Contraseña',
         'gender' => 'Genero',
-        'territorial' => 'Territorial',
+        'regional' => 'Regional',
         'role_id' => 'Rol del usuario',
-        'delegation_id' => 'Delegación',
-        'quartile_id' => 'Cuartil del usuario',
+        'delegation_id' => 'Sucursal',
+        'quartile_id' => 'Figura del usuario',
         'group_id' => 'Grupo del usuario',
         'password_check' => 'Confirma tu contraseña',
         'user_code' => 'Código de usuario',

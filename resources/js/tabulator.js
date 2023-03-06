@@ -143,12 +143,12 @@ import { isNull } from "lodash";
 							table += `<tr class="whitespace-nowrap"><th>Nombre</th><td>${cell.getData().name}</td></tr>`
 							table += `<tr class="whitespace-nowrap"><th>Apellido</th><td>${cell.getData().last_name}</td></tr>`;
 							table += `<tr class="whitespace-nowrap"><th>Email</th><td>${cell.getData().email}</td></tr>`;
-							table += `<tr class="whitespace-nowrap"><th>SECI Coins</th><td>${cell.getData().secicoins}</td></tr>`;
+							table += `<tr class="whitespace-nowrap"><th>Soles</th><td>${cell.getData().soles}</td></tr>`;
 							table += `<tr class="whitespace-nowrap"><th>Rol</th><td>${cell.getData().role_name}</td></tr>`;
-							table += `<tr class="whitespace-nowrap"><th>Cuartil</th><td>${cell.getData().quartile}</td></tr>`;
+							table += `<tr class="whitespace-nowrap"><th>Figura</th><td>${cell.getData().quartile}</td></tr>`;
 							table += `<tr class="whitespace-nowrap"><th>Grupo</th><td>${cell.getData().group}</td></tr>`;
-							table += `<tr class="whitespace-nowrap"><th>Delegación</th><td>${cell.getData().delegation_name}</td></tr>`;
-							table += `<tr class="whitespace-nowrap"><th>Código Delegación</th><td>${cell.getData().delegation_code}</td></tr>`;
+							table += `<tr class="whitespace-nowrap"><th>Sucursal</th><td>${cell.getData().delegation_name}</td></tr>`;
+							table += `<tr class="whitespace-nowrap"><th>Código Sucursal</th><td>${cell.getData().delegation_code}</td></tr>`;
 							$('#table-content').html(table);
 						});
 
@@ -156,8 +156,6 @@ import { isNull } from "lodash";
 						.find(".edit")
 						.on("click", function () {
 							$('#id').val(cell.getData().id);
-							$('#dni').val(cell.getData().dni);
-							$('#dni').attr("placeholder", cell.getData().dni);
 
 							$('#user_code').val(cell.getData().user_code);
 							$('#user_code').attr("placeholder", cell.getData().user_code);
@@ -171,11 +169,11 @@ import { isNull } from "lodash";
 							$('#email').val(cell.getData().email);
 							$('#email').attr("placeholder", cell.getData().email);
 
-							$('#territorial').val(cell.getData().territorial);
-							$('#territorial').attr("placeholder", cell.getData().territorial);
+							$('#regional').val(cell.getData().regional);
+							$('#regional').attr("placeholder", cell.getData().regional);
 
-							$('#secicoins').val(cell.getData().secicoins);
-							$('#secicoins').attr("placeholder", cell.getData().secicoins);
+							$('#soles').val(cell.getData().soles);
+							$('#soles').attr("placeholder", cell.getData().soles);
 
 							$('#role_id').val(cell.getData().role_id).attr("selected", "selected");
 
@@ -433,13 +431,12 @@ import { isNull } from "lodash";
 			let data = {
 				"_token": $('meta[name="csrf-token"]').attr('content'),
 				id: $('#id').val(),
-				dni: $('#dni').attr('placeholder'),
 				name: $('#name').val(),
 				user_code: $('#user_code').val(),
 				last_name: $('#last_name').val(),
 				email: $('#email').val(),
-				territorial: $('#territorial').val(),
-				secicoins: $('#secicoins').val(),
+				regional: $('#regional').val(),
+				soles: $('#soles').val(),
 				password: $('#password').val(),
 				role_id: $('#role_id').val(),
 				delegation_id: $('#delegation_id').val(),

@@ -121,7 +121,7 @@ import Dropzone from "dropzone";
                                         item.id +
                                         '">' +
                                         '<td class="text-right">' +
-                                        item.dni +
+                                        item.user_code +
                                         "</td>" +
                                         '<td class="text-right">' +
                                         item.name +

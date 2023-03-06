@@ -62,7 +62,7 @@ class ProductivityImport implements
     } */
 
     $user_id = DB::table('users')
-      ->where('dni', $row['dni'])
+      ->where('user_code', $row['user_code'])
       ->first()->id;
 
     $exists = DB::table('productivities')

@@ -54,7 +54,6 @@
       <table class="table table-auto hidden">
         <thead class="table-dark">
           <tr>
-            <th class="text-center">DNI</th>
             <th class="text-center">Nombre</th>
             <th class="text-center">Póliza Objetivo</th>
             <th class="text-center">Ventas</th>
@@ -210,9 +209,6 @@
             const item = data[i];
             let tr = '<tr id="' + item.id + '">'
               + '<td class="text-right">'
-              + item.dni
-              + '</td>'
-              + '<td class="text-right">'
               + item.name
               + '</td>'
               + '<td class="text-right">'
@@ -300,9 +296,6 @@
                 for (let i = 0; i < data.length; i++) {
                   const item = data[i];
                   let tr = '<tr id="' + item.id + '">'
-                    + '<td class="text-right">'
-                    + item.dni
-                    + '</td>'
                     + '<td class="text-right">'
                     + item.name
                     + '</td>'

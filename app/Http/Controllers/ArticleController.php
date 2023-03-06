@@ -592,7 +592,7 @@ class ArticleController extends Controller {
 				->select('sections.*', 'files.media_path as img')
 				->join('sections', 'sections.page_id', '=', 'pages.id')
 				->leftJoin('files', 'files.id', '=', 'sections.file_id')
-				->where('pages.title', 'Salas')
+				->where('pages.title', 'Clubes')
 				->get();
 		} else {
 			return $sections;
@@ -667,7 +667,7 @@ class ArticleController extends Controller {
 				->select('sections.*', 'files.media_path as img')
 				->join('sections', 'sections.page_id', '=', 'pages.id')
 				->leftJoin('files', 'files.id', '=', 'sections.file_id')
-				->where('pages.title', 'Salas')
+				->where('pages.title', 'Clubes')
 				->get();
 		} else {
 			return $sections;
@@ -910,7 +910,6 @@ class ArticleController extends Controller {
 			->first();
 
 		$data = [
-			'dni' => $user->dni,
 			'name' => $user->name,
 			'email' => $user->email,
 			'agent_code' => $request->agent_code,

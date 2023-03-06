@@ -1,13 +1,13 @@
 @extends('../layout/' . $layout)
 
 @section('subhead')
-    <title>Lista de posts de Salas</title>
+    <title>Lista de posts de Clubes</title>
 @endsection
 
 @section('subcontent')
     <div id="alert" class="hidden"></div>
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8" id="users-list">
-        <h2 class="text-lg font-medium mr-auto">Lista de posts de Salas</h2>
+        <h2 class="text-lg font-medium mr-auto">Lista de posts de Clubes</h2>
     </div>
     <!-- BEGIN: Table Head Options -->
     <div class="intro-y box">

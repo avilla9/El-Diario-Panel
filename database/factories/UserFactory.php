@@ -13,7 +13,7 @@ class UserFactory extends Factory {
      */
     public function definition() {
         return [
-            'dni' => rand(1000000, 9999999),
+            'user_code' => rand(1000000, 9999999),
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
@@ -23,7 +23,7 @@ class UserFactory extends Factory {
             'remember_token' => Str::random(10),
             'role_id' => rand(1, 5),
             'delegation_code' => 'DE00001113',
-            'territorial' => 'II',
+            'regional' => 'II',
         ];
     }
 

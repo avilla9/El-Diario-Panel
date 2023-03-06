@@ -59,7 +59,6 @@ class ProductivityController extends Controller {
                 'productivities.bonus as bonus',
                 'productivities.incentive as incentive',
                 'users.name as name',
-                'users.dni as dni',
             )
             ->join('campaigns', 'campaigns.id', '=', 'productivities.campaign_id')
             ->join('users', 'users.id', '=', 'productivities.user_id')
