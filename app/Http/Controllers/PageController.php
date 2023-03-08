@@ -293,7 +293,7 @@ class PageController extends Controller {
         $delegations = Delegation::all();
         $roles = Role::all();
         $users = User::all();
-
+        $page = Page::where('title', 'Clubes')->first();
         $sections = DB::table('pages')
             ->join('sections', 'sections.page_id', '=', 'pages.id')
             ->where('pages.title', 'Clubes')
@@ -327,8 +327,9 @@ class PageController extends Controller {
                 'name' => 'Usuarios',
                 'data' => $users
             ] : true;
-
+            
         return view('pages/content/room/sections', [
+            'page' => $page,
             'sections' => $sections,
             'articles'  => $articles,
             'files' => $files,

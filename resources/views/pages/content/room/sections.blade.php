@@ -9,7 +9,7 @@
 <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
   <h2 class="text-lg font-medium mr-auto">Gestión de la sección</h2>
   <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-    <input type="text" class="hidden" value= {{$sections[0]->page_id}} id="pageId">
+    <input type="text" class="hidden" value= {{$page->id}} id="pageId">
     <button id="open-create" class="btn btn-primary shadow-md flex items-center" aria-expanded="false">
       Crear <i class="w-4 h-4 ml-2" data-feather="plus-square"></i>
     </button>
