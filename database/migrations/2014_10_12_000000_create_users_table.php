@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration {
             $table->string('delegation_code')->nullable();
             $table->string('regional', 25)->nullable();
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
