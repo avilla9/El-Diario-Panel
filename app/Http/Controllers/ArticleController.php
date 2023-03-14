@@ -468,17 +468,29 @@ class ArticleController extends Controller {
 
 	function validateAccess(Request $request) {
 		$article = Article::where('id', $request->article_id)->first();
-		if ($article) {
-			if ($article->unrestricted) {
-				return 1;
-			}
+		$sectionsFilters = ArticleFilter::where('article_id', $request->article_id)->get();
+
+		if ($sectionsFilters) {
+			$users = DB::table('users')
+				->select('users.*')
+				->join('delegations', 'delegations.code', '=', 'users.delegation_code')
+				->whereIn('delegations.id', $sectionsFilters['delegations'])
+				->orWhereIn('users.role_id', $sectionsFilters['roles'])
+				->orWhereIn('users.quartile_id', $sectionsFilters['quartiles'])
+				->orWhereIn('users.group_id', $sectionsFilters['groups'])
+				->orWhereIn('users.id', $sectionsFilters['users'])
+				->get();
+			return $users;
 		}
 
+		if ($article->unrestricted) {
+			return 1;
+		}
+		
 		$access = Access::where([
 			'user_id' => $request->user_id,
 			'article_id' => $request->article_id,
 		])->first();
-
 		return $access ? 1 : 0;
 	}
 

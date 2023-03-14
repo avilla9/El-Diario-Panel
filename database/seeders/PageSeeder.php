@@ -96,12 +96,12 @@ class PageSeeder extends Seeder {
                     [
                         'title' => 'Share today',
                         'custom_class' => 'learn-today',
-                        'subtitle' => 'Comparte y gana Soles por ello.',
+                        'subtitle' => 'Comparte y gana secicoins por ello.',
                     ],
                     [
                         'title' => 'Love today',
                         'custom_class' => 'wall-of-fame',
-                        'subtitle' => 'Dinos lo que te gusta y gana Soles por hacerlo!',
+                        'subtitle' => 'Dinos lo que te gusta y gana secicoins por hacerlo!',
                     ],
                     [
                         'title' => 'La Boutique Ocaso',

@@ -143,7 +143,7 @@ import { isNull } from "lodash";
 							table += `<tr class="whitespace-nowrap"><th>Nombre</th><td>${cell.getData().name}</td></tr>`
 							table += `<tr class="whitespace-nowrap"><th>Apellido</th><td>${cell.getData().last_name}</td></tr>`;
 							table += `<tr class="whitespace-nowrap"><th>Email</th><td>${cell.getData().email}</td></tr>`;
-							table += `<tr class="whitespace-nowrap"><th>Soles</th><td>${cell.getData().soles}</td></tr>`;
+							table += `<tr class="whitespace-nowrap"><th>secicoins</th><td>${cell.getData().secicoins}</td></tr>`;
 							table += `<tr class="whitespace-nowrap"><th>Rol</th><td>${cell.getData().role_name}</td></tr>`;
 							table += `<tr class="whitespace-nowrap"><th>Figura</th><td>${cell.getData().quartile}</td></tr>`;
 							table += `<tr class="whitespace-nowrap"><th>Grupo</th><td>${cell.getData().group}</td></tr>`;
@@ -169,11 +169,11 @@ import { isNull } from "lodash";
 							$('#email').val(cell.getData().email);
 							$('#email').attr("placeholder", cell.getData().email);
 
-							$('#regional').val(cell.getData().regional);
-							$('#regional').attr("placeholder", cell.getData().regional);
+							$('#territorial').val(cell.getData().territorial);
+							$('#territorial').attr("placeholder", cell.getData().territorial);
 
-							$('#soles').val(cell.getData().soles);
-							$('#soles').attr("placeholder", cell.getData().soles);
+							$('#secicoins').val(cell.getData().secicoins);
+							$('#secicoins').attr("placeholder", cell.getData().secicoins);
 
 							$('#role_id').val(cell.getData().role_id).attr("selected", "selected");
 
@@ -435,8 +435,8 @@ import { isNull } from "lodash";
 				user_code: $('#user_code').val(),
 				last_name: $('#last_name').val(),
 				email: $('#email').val(),
-				regional: $('#regional').val(),
-				soles: $('#soles').val(),
+				territorial: $('#territorial').val(),
+				secicoins: $('#secicoins').val(),
 				password: $('#password').val(),
 				role_id: $('#role_id').val(),
 				delegation_id: $('#delegation_id').val(),

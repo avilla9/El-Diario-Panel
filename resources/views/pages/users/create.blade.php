@@ -49,11 +49,11 @@
             </div>
             <div class="mt-3">
               <label for="regular-form-1" class="form-label">Regional</label>
-              <input id="regular-form-1" type="text" class="form-control" name="regional" placeholder="Regional" value="{{ old('regional') }}">
+              <input id="regular-form-1" type="text" class="form-control" name="territorial" placeholder="Regional" value="{{ old('territorial') }}">
             </div>
             <div class="mt-3">
               <label for="regular-form-1" class="form-label">Soles</label>
-              <input id="regular-form-1" type="number" class="form-control" name="soles" placeholder="Soles">
+              <input id="regular-form-1" type="number" class="form-control" name="secicoins" placeholder="Soles">
             </div>
             <div class="mt-3">
               <label for="regular-form-4" class="form-label" style="width: 100%;">Contraseña</label>

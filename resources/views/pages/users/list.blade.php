@@ -173,12 +173,12 @@
                     </div>
                     <div class="mt-3">
                       <label for="regular-form-1" class="form-label">Regional</label>
-                      <input id="regional" type="text" class="form-control" name="regional"
+                      <input id="territorial" type="text" class="form-control" name="territorial"
                         placeholder="Regional">
                     </div>
                     <div class="mt-3">
                       <label for="regular-form-1" class="form-label">Soles</label>
-                      <input id="soles" type="number" class="form-control" name="soles"
+                      <input id="secicoins" type="number" class="form-control" name="secicoins"
                         placeholder="Soles">
                     </div>
                     <div class="mt-3">

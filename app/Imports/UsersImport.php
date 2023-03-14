@@ -60,8 +60,8 @@ class UsersImport implements
             $group = NULL;
         }
 
-        if (strlen($row['soles'])) {
-            $seci = $row['soles'];
+        if (strlen($row['secicoins'])) {
+            $seci = $row['secicoins'];
         } else {
             $seci = 0;
         }
@@ -71,10 +71,10 @@ class UsersImport implements
             'name' => $row['nombre'],
             'last_name' => $row['apellido'],
             'role_id' => $role,
-            'regional' => $row['regional'],
+            'territorial' => $row['territorial'],
             'password' => Hash::make($row['contrasena']),
             'active' => 1,
-            'soles' => $seci,
+            'secicoins' => $seci,
             'delegation_code' => $delegation,
             'quartile_id' => $quartile,
             'group_id' => $group,
@@ -98,10 +98,10 @@ class UsersImport implements
         //             'name' => $row['name'],
         //             'last_name' => $row['last_name'],
         //             'role_id' => $role,
-        //             'regional' => $row['regional'],
+        //             'territorial' => $row['territorial'],
         //             'password' => Hash::make($row['password']),
         //             'active' => 1,
-        //             'soles' => $seci,
+        //             'secicoins' => $seci,
         //             'delegation_code' => $delegation,
         //             'quartile_id' => $quartile,
         //             'group_id' => $group,
@@ -115,10 +115,10 @@ class UsersImport implements
         //             'name' => $row['name'],
         //             'last_name' => $row['last_name'],
         //             'role_id' => $role,
-        //             'regional' => $row['regional'],
+        //             'territorial' => $row['territorial'],
         //             'password' => Hash::make($row['password']),
         //             'active' => 1,
-        //             'soles' => $seci,
+        //             'secicoins' => $seci,
         //             'delegation_code' => $delegation,
         //             'quartile_id' => $quartile,
         //             'group_id' => $group,

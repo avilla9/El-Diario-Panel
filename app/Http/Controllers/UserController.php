@@ -75,7 +75,7 @@ class UserController extends Controller {
                         ->symbols()
                         ->uncompromised()
                 ],
-                'regional' => 'required',
+                'territorial' => 'required',
                 'role_id' => 'required|not_in:0',
                 'delegation_id' => 'required|not_in:0',
                 'quartile_id' => 'required|not_in:0',
@@ -141,7 +141,7 @@ class UserController extends Controller {
                     ->symbols()
                     ->uncompromised()
             ],
-            'regional' => 'required',
+            'territorial' => 'required',
             'role_id' => 'required|not_in:0',
             'delegation_id' => 'required|not_in:0',
             'quartile_id' => 'required|not_in:0',
@@ -156,8 +156,8 @@ class UserController extends Controller {
                 'name' => $request->name,
                 'gender' => $request->gender,
                 'email' => $request->email,
-                'regional' => $request->regional,
-                'soles' => $request->soles,
+                'territorial' => $request->territorial,
+                'secicoins' => $request->secicoins,
                 'group_id' => $request->group_id,
                 'role_id' => $request->role_id,
                 'delegation_code' => $delegation->code,
@@ -197,8 +197,8 @@ class UserController extends Controller {
             'users.id',
             'users.name',
             'users.last_name',
-            'users.soles',
-            'users.regional as regional',
+            'users.secicoins',
+            'users.territorial as territorial',
             'users.role_id',
             'roles.name as role_name',
             'roles.description as role_description',

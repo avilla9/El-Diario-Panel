@@ -154,7 +154,7 @@ return [
         'email' => 'Correo',
         'password' => 'Contraseña',
         'gender' => 'Genero',
-        'regional' => 'Regional',
+        'territorial' => 'territorial',
         'role_id' => 'Rol del usuario',
         'delegation_id' => 'Sucursal',
         'quartile_id' => 'Figura del usuario',
