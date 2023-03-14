@@ -67,7 +67,6 @@ class UsersImport implements
         }
 
         $data = [
-            'email' => $row['correo'],
             'user_code' => $row['codigo'],
             'name' => $row['nombre'],
             'last_name' => $row['apellido'],
@@ -89,7 +88,7 @@ class UsersImport implements
             $data['email'] = $row['correo'];
             $user = User::create($data);
         }
-        
+
         return $user;
 
         // if (userExist($row['email'])) {
