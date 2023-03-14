@@ -216,19 +216,19 @@ class UserController extends Controller {
                 '=',
                 'roles.id'
             )
-            ->join(
+            ->leftJoin(
                 'quartiles',
                 'quartiles.id',
                 '=',
                 'users.quartile_id'
             )
-            ->join(
+            ->leftJoin(
                 'groups',
                 'groups.id',
                 '=',
                 'users.group_id'
             )
-            ->join(
+            ->leftJoin(
                 'delegations',
                 'delegations.code',
                 '=',

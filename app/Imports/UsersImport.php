@@ -66,28 +66,31 @@ class UsersImport implements
             $seci = 0;
         }
 
-        // $email = $row['email'];
+        $data = [
+            'email' => $row['correo'],
+            'user_code' => $row['codigo'],
+            'name' => $row['nombre'],
+            'last_name' => $row['apellido'],
+            'role_id' => $role,
+            'regional' => $row['regional'],
+            'password' => Hash::make($row['contrasena']),
+            'active' => 1,
+            'soles' => $seci,
+            'delegation_code' => $delegation,
+            'quartile_id' => $quartile,
+            'group_id' => $group,
+            'deleted_at' => NULL,
+        ];
 
-
-        return User::updateOrCreate(
-            [
-                'email' => $row['correo']
-            ],
-            [
-                'user_code' => $row['codigo'],
-                'name' => $row['nombre'],
-                'last_name' => $row['apellido'],
-                'role_id' => $role,
-                'regional' => $row['regional'],
-                'password' => Hash::make($row['contrasena']),
-                'active' => 1,
-                'soles' => $seci,
-                'delegation_code' => $delegation,
-                'quartile_id' => $quartile,
-                'group_id' => $group,
-                'deleted_at' => NULL,
-            ]
-        );
+        $user = User::where('email', $row['correo'])->first();
+        if ($user) {
+            $user->update($data);
+        } else {
+            $data['email'] = $row['correo'];
+            $user = User::create($data);
+        }
+        
+        return $user;
 
         // if (userExist($row['email'])) {
         //     User::where('email', $row['email'])->update(
