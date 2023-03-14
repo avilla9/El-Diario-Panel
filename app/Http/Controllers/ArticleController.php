@@ -468,13 +468,17 @@ class ArticleController extends Controller {
 
 	function validateAccess(Request $request) {
 		$article = Article::where('id', $request->article_id)->first();
-		$access = $article->unrestricted;
-		if (!$access) {
-			$access = Access::where([
-				'user_id' => $request->user_id,
-				'article_id' => $request->article_id,
-			])->first();
+		if ($article) {
+			if ($article->unrestricted) {
+				return 1;
+			}
 		}
+
+		$access = Access::where([
+			'user_id' => $request->user_id,
+			'article_id' => $request->article_id,
+		])->first();
+
 		return $access ? 1 : 0;
 	}
 
