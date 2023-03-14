@@ -129,6 +129,9 @@ class UsersImport implements
     public function rules(): array
     {
         return [
+            'codigo' => 'required',
+            'nombre' => 'required',
+            'apellido' => 'required',
             'correo' => 'required|email',
             'contrasena' => [
                 'required',
@@ -139,15 +142,7 @@ class UsersImport implements
                     ->symbols()
                     ->uncompromised()
             ],
-            'nombre' => 'required',
-            'apellido' => 'required',
             'rol' => 'required',
-            'regional' => 'required',
-            'soles' => 'required',
-            'grupo' => 'required',
-            'figura' => 'required',
-            'sucursal' => 'required',
-            'codigo' => 'required',
         ];
     }
 
