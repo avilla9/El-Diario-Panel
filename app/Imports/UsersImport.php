@@ -74,7 +74,6 @@ class UsersImport implements
                 'email' => $row['correo']
             ],
             [
-                'email', $row['correo'],
                 'user_code' => $row['codigo'],
                 'name' => $row['nombre'],
                 'last_name' => $row['apellido'],
