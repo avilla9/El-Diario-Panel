@@ -20,6 +20,5 @@ mix.js("resources/js/app.js", "public/dist/js")
     .copyDirectory("resources/fonts", "public/dist/fonts")
     .copyDirectory("resources/images", "public/dist/images")
     .browserSync({
-        proxy: "lienzoestudio.test",
         files: ["resources/**/*.*"],
     });
