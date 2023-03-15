@@ -269,26 +269,33 @@
         success: function(response) {
           // console.log(response.sectionsFilters);
           if (response.sectionsFilters[0]) {
-            // console.log(response.sectionsFilters[0].groups);
-            $.each(response.sectionsFilters[0].groups, function(index, value) {
-              document.querySelector(".selector-groups").tomselect.addItem(value)
-            });
-            $.each(response.sectionsFilters[0].delegations, function(index, value) {
-              document.querySelector(".selector-delegations").tomselect.addItem(value)
-            });
-            $.each(response.sectionsFilters[0].roles, function(index, value) {
-                document.querySelector(".selector-roles").tomselect.addItem(value)
-            });
-            $.each(response.sectionsFilters[0].users, function(index, value) {
-                document.querySelector(".selector-users").tomselect.addItem(value)
-            });
-            $.each(response.sectionsFilters[0].quartiles, function(index, value) {
-                document.querySelector(".selector-quartiles").tomselect.addItem(value)
-            });
-            myModal.show()
-          } else {
-            myModal.show()
-            console.log("no filters");
+            if (response.sectionsFilters[0].groups || response.sectionsFilters[0].delegations || response.sectionsFilters[0].roles || response.sectionsFilters[0].quartiles == null) {
+              return Swal.fire({
+                icon: 'error',
+                title: '¡ERROR!',
+                text: 'Ha ocurrido un error al consultar los filtros, por favor intente de nuevo mas tarde',
+              });
+            } else {
+              $.each(response.sectionsFilters[0].groups, function(index, value) {
+                document.querySelector(".selector-groups").tomselect.addItem(value)
+              });
+              $.each(response.sectionsFilters[0].delegations, function(index, value) {
+                document.querySelector(".selector-delegations").tomselect.addItem(value)
+              });
+              $.each(response.sectionsFilters[0].roles, function(index, value) {
+                  document.querySelector(".selector-roles").tomselect.addItem(value)
+              });
+              $.each(response.sectionsFilters[0].users, function(index, value) {
+                  document.querySelector(".selector-users").tomselect.addItem(value)
+              });
+              $.each(response.sectionsFilters[0].quartiles, function(index, value) {
+                  document.querySelector(".selector-quartiles").tomselect.addItem(value)
+              });
+              myModal.show()
+            }
+            } else {
+              myModal.show()
+              console.log("no filters");
             
           }
         },
