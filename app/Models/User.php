@@ -59,13 +59,6 @@ class User extends Authenticatable {
     ];
 
     /**
-     * The attributes that appends to returned entities.
-     *
-     * @var array
-     */
-    protected $appends = ['photo'];
-
-    /**
      * The getter that return accessible URL for user photo.
      *
      * @var array

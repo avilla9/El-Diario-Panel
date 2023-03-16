@@ -42,7 +42,6 @@ Route::prefix('/posts')->group(function () {
         Route::post('/validate', 'validateAccess');
         Route::get('/sections-filters/{id}', 'sectionsFilters');
         Route::delete('/delete-section/{id}', 'sectionsDelete');
-        // Route::post('/validation', 'validateSection');
         Route::post('/list', 'list')->name('posts.list');
         Route::post('/postDetails', 'postDetails');
         Route::get('/room/{articles}', 'sectionDetails');
