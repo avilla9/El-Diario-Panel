@@ -11,6 +11,7 @@ class ArticleFilter extends Model
 
     protected $fillable = [
         'article_id',
+        'section_id',
         'groups',
         'quartiles',
         'delegations',

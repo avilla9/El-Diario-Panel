@@ -128,7 +128,7 @@ class PageSeeder extends Seeder {
                 ]
             ],
             [
-                'title' => 'La Boutique',
+                'title' => 'Accesos',
                 'sections' => [['title' => 'Única']],
             ]
         ];

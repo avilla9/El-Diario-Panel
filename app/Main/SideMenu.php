@@ -324,7 +324,7 @@ class SideMenu {
             ],
             'access-content' => [
                 'icon' => 'log-in',
-                'title' => 'La Boutique',
+                'title' => 'Accesos',
                 'sub_menu' => [
                     'content-access-create' => [
                         'title' => 'Crear contenido',

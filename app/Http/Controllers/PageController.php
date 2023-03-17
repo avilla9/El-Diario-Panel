@@ -347,7 +347,7 @@ class PageController extends Controller {
 
     function contentaccessList() {
         return view('pages/content/access/list', [
-            'articles'  => articlesByPage('La Boutique')
+            'articles'  => articlesByPage('Accesos')
         ]);
     }
 

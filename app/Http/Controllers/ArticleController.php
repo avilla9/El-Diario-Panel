@@ -15,6 +15,7 @@ use App\Models\User;
 use Dotenv\Validator;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Response as HttpResponse;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 
 use function PHPSTORM_META\map;
@@ -424,39 +425,17 @@ class ArticleController extends Controller {
 			'page_id' => $request->page_id
 		];
 
-
-		$articleid = DB::table('sections')->insertGetId($data);
+		$sectionId = DB::table('sections')->insertGetId($data);
 
 		$filters = [
+			'section_id' => $sectionId,
 			'groups' => !is_null($request->groups) ? $request->groups : [0],
 			'quartiles' => !is_null($request->quartiles) ? $request->quartiles : [0],
 			'delegations' => !is_null($request->delegations) ? $request->delegations : [0],
 			'roles' => !is_null($request->roles) ? $request->roles : [0],
 			'users' => !is_null($request->users) ? $request->users : [0],
 		];
-
-		$filters['article_id'] = $articleid;
-		ArticleFilter::create($filters);
-		$users = DB::table('users')
-			->select('users.*')
-			->join('delegations', 'delegations.code', '=', 'users.delegation_code')
-			->whereIn('delegations.id', $filters['delegations'])
-			->orWhereIn('users.role_id', $filters['roles'])
-			->orWhereIn('users.quartile_id', $filters['quartiles'])
-			->orWhereIn('users.group_id', $filters['groups'])
-			->orWhereIn('users.id', $filters['users'])
-			->get();
-
-
-		foreach ($users as $key => $user) {
-			DB::table('accesses')
-				->insert([
-					'user_id' => $user->id,
-					'article_id' => $articleid,
-				]);
-		}
-
-		return $users;
+		return ArticleFilter::create($filters);
 	}
 
 	public function sectionsDelete(Request $request) {
@@ -467,41 +446,69 @@ class ArticleController extends Controller {
 	}
 
 	function validateAccess(Request $request) {
-		$article = Article::where('id', $request->article_id)->first();
-		$sectionsFilters = ArticleFilter::where('article_id', $request->article_id)->get();
+		$isArticleUnrestricted = Article::where([
+			['id', $request->article_id],
+			['unrestricted', 1]
+		]);
 
-		if ($sectionsFilters) {
-			$users = DB::table('users')
-				->select('users.*')
-				->join('delegations', 'delegations.code', '=', 'users.delegation_code')
-				->whereIn('delegations.id', $sectionsFilters['delegations'])
-				->orWhereIn('users.role_id', $sectionsFilters['roles'])
-				->orWhereIn('users.quartile_id', $sectionsFilters['quartiles'])
-				->orWhereIn('users.group_id', $sectionsFilters['groups'])
-				->orWhereIn('users.id', $sectionsFilters['users'])
-				->get();
-			return $users;
-		}
-
-		if ($article->unrestricted) {
+		if ($isArticleUnrestricted) {
 			return 1;
 		}
-		
-		$access = Access::where([
-			'user_id' => $request->user_id,
-			'article_id' => $request->article_id,
+
+		$unrestricted = ArticleFilter::where([
+			['article_id', $request->article_id],
+			["groups", "[0]"],
+			["quartiles", "[0]"],
+			["delegations", "[0]"],
+			["roles", "[0]"],
+			["users", "[0]"],
 		])->first();
-		return $access ? 1 : 0;
+
+		if ($unrestricted) {
+			return 1;
+		}
+
+		$articleFilter = ArticleFilter::where('article_id', $request->article_id)->first();
+		$users = User::select('users.id')
+			->join('delegations', 'delegations.code', '=', 'users.delegation_code')
+			->whereIn('delegations.id', $articleFilter->delegations)
+			->orWhereIn('users.role_id', $articleFilter->roles)
+			->orWhereIn('users.quartile_id', $articleFilter->quartiles)
+			->orWhereIn('users.group_id', $articleFilter->groups)
+			->orWhereIn('users.id', $articleFilter->users)
+			->pluck('id')
+			->toArray();
+
+		return in_array($request->user_id, $users) ? 1 : 0;
 	}
 
-	// function validateSection(Request $request) {
-	// 	$access = Access::where([
-	// 		'user_id' => $request->user_id,
-	// 		'article_id' => $request->article_id,
-	// 	])->first();
+	function validateSectionAccess(Request $request) {
+		$unrestricted = ArticleFilter::where([
+			['section_id', $request->section_id],
+			["groups", "[0]"],
+			["quartiles", "[0]"],
+			["delegations", "[0]"],
+			["roles", "[0]"],
+			["users", "[0]"],
+		])->first();
 
-	// 	return $access ? 1 : 0;
-	// }
+		if ($unrestricted) {
+			return 1;
+		}
+
+		$articleFilter = ArticleFilter::where('section_id', $request->section_id)->first();
+		$users = User::select('users.id')
+			->join('delegations', 'delegations.code', '=', 'users.delegation_code')
+			->whereIn('delegations.id', $articleFilter->delegations)
+			->orWhereIn('users.role_id', $articleFilter->roles)
+			->orWhereIn('users.quartile_id', $articleFilter->quartiles)
+			->orWhereIn('users.group_id', $articleFilter->groups)
+			->orWhereIn('users.id', $articleFilter->users)
+			->pluck('id')
+			->toArray();
+
+		return in_array($request->user_id, $users) ? 1 : 0;
+	}
 
 	function postDetails(Request $request) {
 		$article = Article::select('articles.*', 'files.media_path')
@@ -585,35 +592,6 @@ class ArticleController extends Controller {
 		}
 	}
 
-	function roomSection(Request $request) {
-		$data = [
-			'section_id' => $request->section,
-			'title' => $request->title,
-			'description' => $request->description,
-			'file_id' => $request->image
-		];
-
-		$sections = DB::table('sections')
-			->updateOrInsert(
-				[
-					'id' => $data['section_id'],
-				],
-				[
-					'file_id' => $data['file_id'],
-				],
-			);
-
-		if ($sections) {
-			return DB::table('pages')
-				->select('sections.*', 'files.media_path as img')
-				->join('sections', 'sections.page_id', '=', 'pages.id')
-				->leftJoin('files', 'files.id', '=', 'sections.file_id')
-				->where('pages.title', 'Clubes')
-				->get();
-		} else {
-			return $sections;
-		}
-	}
 	public function sectionsFilters($id) {
 		$sectionsFilters = ArticleFilter::where('article_id', $id)->get();
 
