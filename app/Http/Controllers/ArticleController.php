@@ -428,35 +428,14 @@ class ArticleController extends Controller {
 		$sectionId = DB::table('sections')->insertGetId($data);
 
 		$filters = [
+			'section_id' => $sectionId,
 			'groups' => !is_null($request->groups) ? $request->groups : [0],
 			'quartiles' => !is_null($request->quartiles) ? $request->quartiles : [0],
 			'delegations' => !is_null($request->delegations) ? $request->delegations : [0],
 			'roles' => !is_null($request->roles) ? $request->roles : [0],
 			'users' => !is_null($request->users) ? $request->users : [0],
 		];
-
-		$filters['section_id'] = $sectionId;
-		ArticleFilter::create($filters);
-		$users = DB::table('users')
-			->select('users.*')
-			->join('delegations', 'delegations.code', '=', 'users.delegation_code')
-			->whereIn('delegations.id', $filters['delegations'])
-			->orWhereIn('users.role_id', $filters['roles'])
-			->orWhereIn('users.quartile_id', $filters['quartiles'])
-			->orWhereIn('users.group_id', $filters['groups'])
-			->orWhereIn('users.id', $filters['users'])
-			->get();
-
-
-		foreach ($users as $key => $user) {
-			DB::table('accesses')
-				->insert([
-					'user_id' => $user->id,
-					'article_id' => $sectionId,
-				]);
-		}
-
-		return $users;
+		return ArticleFilter::create($filters);
 	}
 
 	public function sectionsDelete(Request $request) {
@@ -613,35 +592,6 @@ class ArticleController extends Controller {
 		}
 	}
 
-	function roomSection(Request $request) {
-		$data = [
-			'section_id' => $request->section,
-			'title' => $request->title,
-			'description' => $request->description,
-			'file_id' => $request->image
-		];
-
-		$sections = DB::table('sections')
-			->updateOrInsert(
-				[
-					'id' => $data['section_id'],
-				],
-				[
-					'file_id' => $data['file_id'],
-				],
-			);
-
-		if ($sections) {
-			return DB::table('pages')
-				->select('sections.*', 'files.media_path as img')
-				->join('sections', 'sections.page_id', '=', 'pages.id')
-				->leftJoin('files', 'files.id', '=', 'sections.file_id')
-				->where('pages.title', 'Clubes')
-				->get();
-		} else {
-			return $sections;
-		}
-	}
 	public function sectionsFilters($id) {
 		$sectionsFilters = ArticleFilter::where('article_id', $id)->get();
 
