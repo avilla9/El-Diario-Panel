@@ -425,8 +425,7 @@ class ArticleController extends Controller {
 			'page_id' => $request->page_id
 		];
 
-
-		$articleid = DB::table('sections')->insertGetId($data);
+		$sectionId = DB::table('sections')->insertGetId($data);
 
 		$filters = [
 			'groups' => !is_null($request->groups) ? $request->groups : [0],
@@ -436,7 +435,7 @@ class ArticleController extends Controller {
 			'users' => !is_null($request->users) ? $request->users : [0],
 		];
 
-		$filters['article_id'] = $articleid;
+		$filters['section_id'] = $sectionId;
 		ArticleFilter::create($filters);
 		$users = DB::table('users')
 			->select('users.*')
@@ -453,7 +452,7 @@ class ArticleController extends Controller {
 			DB::table('accesses')
 				->insert([
 					'user_id' => $user->id,
-					'article_id' => $articleid,
+					'article_id' => $sectionId,
 				]);
 		}
 
@@ -468,6 +467,15 @@ class ArticleController extends Controller {
 	}
 
 	function validateAccess(Request $request) {
+		$isArticleUnrestricted = Article::where([
+			['id', $request->article_id],
+			['unrestricted', 1]
+		]);
+
+		if ($isArticleUnrestricted) {
+			return 1;
+		}
+
 		$unrestricted = ArticleFilter::where([
 			['article_id', $request->article_id],
 			["groups", "[0]"],
@@ -492,7 +500,35 @@ class ArticleController extends Controller {
 			->pluck('id')
 			->toArray();
 
-			return in_array($request->user_id, $users) ? 1 : 0;
+		return in_array($request->user_id, $users) ? 1 : 0;
+	}
+
+	function validateSectionAccess(Request $request) {
+		$unrestricted = ArticleFilter::where([
+			['section_id', $request->section_id],
+			["groups", "[0]"],
+			["quartiles", "[0]"],
+			["delegations", "[0]"],
+			["roles", "[0]"],
+			["users", "[0]"],
+		])->first();
+
+		if ($unrestricted) {
+			return 1;
+		}
+
+		$articleFilter = ArticleFilter::where('section_id', $request->section_id)->first();
+		$users = User::select('users.id')
+			->join('delegations', 'delegations.code', '=', 'users.delegation_code')
+			->whereIn('delegations.id', $articleFilter->delegations)
+			->orWhereIn('users.role_id', $articleFilter->roles)
+			->orWhereIn('users.quartile_id', $articleFilter->quartiles)
+			->orWhereIn('users.group_id', $articleFilter->groups)
+			->orWhereIn('users.id', $articleFilter->users)
+			->pluck('id')
+			->toArray();
+
+		return in_array($request->user_id, $users) ? 1 : 0;
 	}
 
 	function postDetails(Request $request) {

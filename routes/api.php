@@ -40,6 +40,7 @@ Route::prefix('/posts')->group(function () {
     Route::controller(ArticleController::class)->group(function () {
         Route::post('/room/creation', 'sectionCreate');
         Route::post('/validate', 'validateAccess');
+        Route::post('/validate-section', 'validateSectionAccess');
         Route::get('/sections-filters/{id}', 'sectionsFilters');
         Route::delete('/delete-section/{id}', 'sectionsDelete');
         Route::post('/list', 'list')->name('posts.list');
