@@ -60,11 +60,13 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $user = DB::table('users')->where('email', $request->email)->first();
-        if($user->deleted_at) {
-            User::where('id', $user->id)->restore();
-            return redirect()->route('crear-usuarios')
-                ->with('success', 'Usuario restaurado satisfactoriamente.');
+        $user = DB::table('users')->where('email', $request->email)->get();
+        if(count($user)) {
+            if($user[0]->deleted_at) {
+                User::where('id', $user[0]->id)->restore();
+                return redirect()->route('crear-usuarios')
+                    ->with('success', 'Usuario restaurado satisfactoriamente.');
+            }
         }
 
         $request->validate(
