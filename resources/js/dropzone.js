@@ -32,7 +32,7 @@ import Dropzone from "dropzone";
                             table += "<tr>";
                             table += "<td>" + error.row + "</td>";
                             table += "<td>" + error.attribute + "</td>";
-                            table += "<td>" + error.values.name + "</td>";
+                            table += "<td>" + error.values.nombre + ' ' + error.values.apellido + "</td>";
                             table += "<td>";
                             for (let j = 0; j < error.errors.length; j++) {
                                 table += error.errors[j] + " ";

@@ -1,4 +1,3 @@
-import xlsx from "xlsx";
 import feather from "feather-icons";
 import Tabulator from "tabulator-tables";
 import { isNull } from "lodash";
@@ -333,12 +332,12 @@ import { isNull } from "lodash";
 			table.download("json", "data.json");
 		});
 
-		$("#tabulator-export-xlsx").on("click", function (event) {
+		/* $("#tabulator-export-xlsx").on("click", function (event) {
 			window.XLSX = xlsx;
 			table.download("xlsx", "data.xlsx", {
 				sheetName: "Products",
 			});
-		});
+		}); */
 
 		$("#tabulator-export-html").on("click", function (event) {
 			table.download("html", "data.html", {
@@ -654,12 +653,12 @@ import { isNull } from "lodash";
 			table.download("json", "data.json");
 		});
 
-		$("#tabulator-export-xlsx").on("click", function (event) {
+		/* $("#tabulator-export-xlsx").on("click", function (event) {
 			window.XLSX = xlsx;
 			table.download("xlsx", "data.xlsx", {
 				sheetName: "Products",
 			});
-		});
+		}); */
 
 		$("#tabulator-export-html").on("click", function (event) {
 			table.download("html", "data.html", {
