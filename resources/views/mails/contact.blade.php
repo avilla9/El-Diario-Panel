@@ -1,5 +1,5 @@
 Hola,
-<p>Este es un mensaje enviado desde la app</p>
+<p>Este es un mensaje enviado desde el Buzón de la app El Diario</p>
 
 <div>
   <p><b>Nombre: </b>&nbsp;{{ $email->name }}</p>

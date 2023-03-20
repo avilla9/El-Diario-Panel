@@ -1,5 +1,5 @@
 Hola,
-Este es un mensaje enviado desde la app
+Este es un mensaje enviado desde el Buzón de la app El Diario
 
 Nombre: {{ $email->name }}
 Correo: {{ $email->email }}
