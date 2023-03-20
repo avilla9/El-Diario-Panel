@@ -19,24 +19,28 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Carbon;
 
-class UserController extends Controller {
+class UserController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $users = User::latest()->paginate(5);
 
         return view('pages/users/list', compact('users'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
-    public function getUserData(Request $request) {
+    public function getUserData(Request $request)
+    {
         return User::where('id', $request->id)->first();
     }
 
-    public function getUserRole(Request $request) {
+    public function getUserRole(Request $request)
+    {
         $role = DB::table('users')
             ->select('roles.name as role_name')
             ->where('users.id', $request->id)
@@ -50,7 +54,8 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
     }
 
     /**
@@ -59,7 +64,66 @@ class UserController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
+        $user = DB::table('users')->where('email', $request->email)->get();
+        if (count($user)) {
+            if ($user[0]->deleted_at) {
+                User::where('id', $user[0]->id)->restore();
+
+                $request->validate(
+                    [
+                        'user_code' => 'required',
+                        'name' => 'required',
+                        'last_name' => 'required',
+                        'password' => [
+                            'required',
+                            Password::min(8)
+                                ->letters()
+                                ->mixedCase()
+                                ->numbers()
+                                ->symbols()
+                                ->uncompromised()
+                        ],
+                        'territorial' => 'required',
+                        'role_id' => 'required|not_in:0',
+                        'delegation_id' => 'required|not_in:0',
+                        'quartile_id' => 'required|not_in:0',
+                        'group_id' => 'required|not_in:0',
+                    ],
+                    [
+                        "password.min" => "El campo :attribute debe contener al menos :min caracteres.",
+                        "password.mixedCase" => "El campo :attribute debe contener al menos una letra mayúcula y una minúscula.",
+                    ],
+                );
+
+                $request->merge(['active' => 1]);
+                $delegation = Delegation::where('id', $request->delegation_id)->first()->code;
+                $request->merge(['delegation_code' => $delegation]);
+
+                $request->merge(['password' => Hash::make($request->password)]);
+
+                User::where('id', $user[0]->id)->update([
+                    'user_code' => $request->user_code,
+                    'name' => $request->name,
+                    'email' => $user[0]->email,
+                    'last_name' => $request->last_name,
+                    'password' => $request->password,
+                    'territorial' => $request->territorial, 
+                    'role_id' => $request->role_id,
+                    'quartile_id' => $request->quartile_id,
+                    'group_id' => $request->group_id,
+                    "active" => $request->active,
+                    "delegation_code" => $request->delegation_code,
+                    "password" => $request->password,
+                ]);
+
+
+                return redirect()->route('crear-usuarios')
+                    ->with('success', 'Usuario restaurado y actualizado satisfactoriamente.');
+            }
+        }
+
         $request->validate(
             [
                 'user_code' => 'required',
@@ -105,7 +169,8 @@ class UserController extends Controller {
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user) {
+    public function show(User $user)
+    {
         //
     }
 
@@ -115,7 +180,8 @@ class UserController extends Controller {
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user) {
+    public function edit(User $user)
+    {
         //
     }
 
@@ -126,7 +192,8 @@ class UserController extends Controller {
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $validator = Validator($request->all(), [
             'user_code' => 'required',
             'name' => 'required',
@@ -178,13 +245,15 @@ class UserController extends Controller {
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user) {
+    public function destroy(User $user)
+    {
         //
     }
 
     /* API */
 
-    public function getAllUsers(Request $request) {
+    public function getAllUsers(Request $request)
+    {
 
         $users = User::select(
             'users.user_code',
@@ -245,11 +314,13 @@ class UserController extends Controller {
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request) {
+    public function delete(Request $request)
+    {
         return User::where('id', $request->id)->update(['deleted_at' => Carbon::now()]);
     }
 
-    public function fileImport(Request $request) {
+    public function fileImport(Request $request)
+    {
         $import = new UsersImport;
         Excel::import($import, $request->file('file')->store('files'));
 
@@ -275,12 +346,14 @@ class UserController extends Controller {
         /* return redirect()->back()->with('errors', $errors); */
     }
 
-    public function deleteImport(Request $request) {
+    public function deleteImport(Request $request)
+    {
         Excel::import(new DeleteUsersImport, $request->file('file')->store('files'));
         return redirect()->back();
     }
 
-    public function password(Request $request) {
+    public function password(Request $request)
+    {
         $validated = Validator::make($request->all(), [
             "email" => 'required|email|max:255|exists:users,email'
         ]);
@@ -322,14 +395,16 @@ class UserController extends Controller {
         ];
     }
 
-    public function newPassword($id) {
+    public function newPassword($id)
+    {
         $user = User::where('id', Crypt::decrypt($id))->get();
         $userId = Crypt::encrypt($user[0]->id);
 
         return view('pages.users.get_password', ['layout' => 'login', "user" => $userId]);
     }
 
-    public function resetPassword(Request $request) {
+    public function resetPassword(Request $request)
+    {
         $validated = Validator::make($request->all(), [
             'password' => [
                 'required',
@@ -365,7 +440,8 @@ class UserController extends Controller {
             "affected" => $affected
         ];
     }
-    public function changePassword(Request $request) {
+    public function changePassword(Request $request)
+    {
         $user = User::where(['id' => $request->user_id])->first();
 
         if (Hash::check($request->old_password, $user->getAuthPassword())) {
