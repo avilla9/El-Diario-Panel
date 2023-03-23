@@ -60,8 +60,8 @@ class UsersImport implements
             $group = NULL;
         }
 
-        if (strlen($row['secicoins'])) {
-            $seci = $row['secicoins'];
+        if (strlen($row['soles'])) {
+            $seci = $row['soles'];
         } else {
             $seci = 0;
         }
@@ -71,7 +71,7 @@ class UsersImport implements
             'name' => $row['nombre'],
             'last_name' => $row['apellido'],
             'role_id' => $role,
-            'territorial' => $row['territorial'],
+            'territorial' => $row['regional'],
             'password' => Hash::make($row['contrasena']),
             'active' => 1,
             'secicoins' => $seci,
