@@ -10,8 +10,8 @@ import { isNull } from "lodash";
 		// Setup Tabulator
 		let table = new Tabulator("#user-tabulator", {
 			ajaxURL: "/api/users/getAllUsers",
-			ajaxFiltering: true,
-			ajaxSorting: true,
+			ajaxFiltering: false,
+			ajaxSorting: false,
 			printAsHtml: true,
 			printStyled: true,
 			pagination: 'local',
