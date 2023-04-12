@@ -14,12 +14,12 @@ class AlterTableUsersLenght extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->longText('territorial', 255)->change();
-            $table->longText('user_code', 255)->change();
-            $table->longText('name', 255)->change();
-            $table->longText('last_name', 255)->change();
-            $table->longText('email', 255)->change();
-            $table->longText('delegation_code', 255)->change();
+            $table->string('user_code', 255)->change();
+            $table->string('name', 255)->change();
+            $table->string('last_name', 255)->change();
+            $table->string('email', 255)->change();
+            $table->string('delegation_code', 255)->change();
+            $table->string('territorial', 255)->change();
         });
     }
 
