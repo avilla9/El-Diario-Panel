@@ -155,6 +155,7 @@
                 <div id="input" class="p-5">
                   <div class="preview">
                     <div class="mt-3">
+                      <input id="itemId" name="itemId" type="text" class="hidden"/>
                       <label for="regular-form-1" class="form-label">Código de usuario</label>
                       <input id="user_code" name="user_code" type="text" class="form-control"
                         placeholder="Código de usuario">
