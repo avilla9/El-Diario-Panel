@@ -155,7 +155,7 @@ import { isNull } from "lodash";
                             .find(".edit")
                             .on("click", function() {
                                 $('#itemId').val(cell.getData().id);
-                                console.log($('#itemId').val())
+
 
                                 $('#user_code').val(cell.getData().user_code);
                                 $('#user_code').attr("placeholder", cell.getData().user_code);

@@ -248,7 +248,7 @@
                   <div class="modal-footer my-5">
 
                     <button type="button" data-tw-dismiss="modal"
-                      class="close btn btn-outline-secondary w-20 mr-1">Cerrar</button>
+                      class="close btn btn-outline-secondary w-20 mr-1" id="cerrar">Cerrar</button>
                     <button type="submit" class="btn btn-primary my-4 update ">Actualizar
                       Usuario</button>
                     <div class="alert alert-success my-3" role="alert" style="display:none;"
@@ -269,4 +269,14 @@
   </div>
 
   <!-- END: HTML Table Data -->
+@endsection
+
+@section('script')
+<script src="{{ asset('js/jquery.js') }}"></script>
+<script>
+$("#cerrar").click(function (e) { 
+  e.preventDefault();
+  $("#password").val("")
+});
+</script>
 @endsection
