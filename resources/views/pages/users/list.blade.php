@@ -197,7 +197,7 @@
                     <label>Codigo Rol del usuario</label>
                     <div class="mt-2">
                       <select data-placeholder="Seleccione un rol para el usuario" name="role_id" id="role_id"
-                        class="tom-select w-full">
+                        class="select-rol tom-select w-full">
                         <option disabled>Seleccione un rol para el usuario</option>
                         @foreach ($roles as $role)
                           <option value="{{ $role->id }}">{{ $role->name }}</option>
@@ -209,7 +209,7 @@
                     <label>Sucursal</label>
                     <div class="mt-2">
                       <select data-placeholder="Seleccione una Sucursal para el usuario" name="delegation_id"
-                        id="delegation_id" class="tom-select w-full">
+                        id="delegation_id" class="select-delegation tom-select w-full">
                         <option disabled>Seleccione una Sucursal para el usuario</option>
                         @foreach ($delegations as $delegation)
                           <option value="{{ $delegation->id }}">
@@ -224,7 +224,7 @@
                     <label>Grupo del usuario</label>
                     <div class="mt-2">
                       <select data-placeholder="Seleccione un rol para el usuario" name="group_id" id="group_id"
-                        class="tom-select w-full">
+                        class="select-group tom-select w-full">
                         <option disabled>Seleccione un grupo para el usuario</option>
                         @foreach ($groups as $group)
                           <option value="{{ $group->id }}">{{ $group->name }}</option>
@@ -237,7 +237,7 @@
                     <label>Figura del usuario</label>
                     <div class="mt-2">
                       <select data-placeholder="Seleccione un rol para el usuario" name="quartile_id" id="quartile_id"
-                        class="tom-select w-full">
+                        class="select-quartiles tom-select w-full">
                         <option disabled>Seleccione un Figura para el usuario</option>
                         @foreach ($quartiles as $quartile)
                           <option value="{{ $quartile->id }}">{{ $quartile->name }}</option>
@@ -248,7 +248,7 @@
                   <div class="modal-footer my-5">
 
                     <button type="button" data-tw-dismiss="modal"
-                      class="btn btn-outline-secondary w-20 mr-1">Cerrar</button>
+                      class="close btn btn-outline-secondary w-20 mr-1">Cerrar</button>
                     <button type="submit" class="btn btn-primary my-4 update ">Actualizar
                       Usuario</button>
                     <div class="alert alert-success my-3" role="alert" style="display:none;"

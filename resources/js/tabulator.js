@@ -175,14 +175,13 @@ import { isNull } from "lodash";
                                 $('#secicoins').val(cell.getData().secicoins);
                                 $('#secicoins').attr("placeholder", cell.getData().secicoins);
 
+                                document.querySelector('.select-rol').tomselect.addItem(cell.getData().role_id)
+                                document.querySelector('.select-delegation').tomselect.addItem(cell.getData().delegation_id)
 
-                                $('#role_id').val(cell.getData().role_id).attr("selected", "selected");
+                                document.querySelector('.select-group').tomselect.addItem(cell.getData().group_id)
+                                document.querySelector('.select-quartiles').tomselect.addItem(cell.getData().quartile_id)
 
-                                $('#delegation_id').val(cell.getData().delegation_id).attr("selected", "selected");
 
-                                $('#group_id').val(cell.getData().group_id).attr("selected", "selected");
-
-                                $('#quartile_id').val(cell.getData().quartile_id).attr("selected", "selected");
                             });
 
                         $(a)
